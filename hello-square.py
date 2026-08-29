@@ -58,7 +58,6 @@ def render():
     window.blit(surface, (0, 0))
     pygame.display.flip()
 
-
 while True:
     render()
     for event in pygame.event.get():
