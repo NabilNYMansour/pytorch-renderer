@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+out/
+data/
+text8
+text8.zip
+enwik9
+enwik9.zip
+*.pyc
