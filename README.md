@@ -1,3 +1,10 @@
+# Purpose
+
+The point of this repo is to learn how pytorch works by wrapping it around a graphics pipeline and using it to render graphics.
+
+![ray tracing](raytrace.png)
+_Ray tracing with pytorch. Check `advanced/raytrace.py`_
+
 # Setup
 
 ```bash
@@ -75,8 +82,3 @@ python advanced/conway.py
 ```bash
 python advanced/raytrace.py
 ```
-
-
-# Purpose
-
-The point of this repo is to learn how pytorch works by wrapping it around a graphics pipeline and using it to render graphics.
