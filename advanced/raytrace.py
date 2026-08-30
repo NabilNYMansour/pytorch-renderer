@@ -185,7 +185,7 @@ while True:
             pygame.quit()
             sys.exit()
 
-    if current_time - last_move_time >= 10:
+    if current_time - last_move_time >= 1:  # in milliseconds
         light_pos[0] = math.sin(current_time / 1000.0)
         light_pos[2] = math.cos(current_time / 1000.0)
         last_move_time = current_time
