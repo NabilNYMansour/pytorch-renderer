@@ -25,9 +25,7 @@ RESOLUTION = (1280, 720)
 WIDTH, HEIGHT = RESOLUTION
 CX, CY = (WIDTH // 2, HEIGHT // 2)
 
-CAMERA_POSITION = torch.tensor(
-    [0.0, 0.0, 0.0], dtype=torch.float32
-)  # Basically ray origin
+CAMERA_POSITION = torch.tensor([0.0, 0.0, 0.0], dtype=torch.float32)
 SPHERE_CENTER = torch.tensor([0.0, 0.0, -1.0], dtype=torch.float32)
 SPHERE_RADIUS = 0.5
 
@@ -74,7 +72,9 @@ def ray_sphere_intersection(ray_origins, ray_directions, sphere_center, sphere_r
     return t_sphere
 
 
-t_sphere = ray_sphere_intersection(CAMERA_POSITION, raydirs, SPHERE_CENTER, SPHERE_RADIUS)
+t_sphere = ray_sphere_intersection(
+    CAMERA_POSITION, raydirs, SPHERE_CENTER, SPHERE_RADIUS
+)
 
 t_floor = (FLOOR_Y - CAMERA_POSITION[1]) / raydirs[..., 1]
 
