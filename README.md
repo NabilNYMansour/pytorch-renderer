@@ -26,40 +26,56 @@ pip install -r requirements-cuda.txt
 
 # Usage
 
-## Hello Square
-
 ```bash
 source .venv/bin/activate
-python hello-square.py
 ```
 
-## Hello Circle
+## Basic
+
+### Hello Square
 
 ```bash
-source .venv/bin/activate
-python hello-circle.py
+python basic/hello-square.py
 ```
 
-## Checkerboard
+### Hello Circle
 
 ```bash
-source .venv/bin/activate
-python checkerboard.py
+python basic/hello-circle.py
 ```
 
-## Conway's Game of Life
+### Checkerboard
 
 ```bash
-source .venv/bin/activate
-python conway.py
+python basic/checkerboard.py
 ```
 
-## Desmos
+### Desmos
 
 ```bash
-source .venv/bin/activate
-python desmos.py
+python basic/desmos.py
 ```
+
+### Ray Directions
+
+```bash
+python basic/ray-directions.py
+```
+
+## Advanced
+
+### Conway's Game of Life
+
+```bash
+python advanced/conway.py
+```
+
+### Raytrace
+
+```bash
+python advanced/raytrace.py
+```
+
 
 # Purpose
 

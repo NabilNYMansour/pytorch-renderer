@@ -6,6 +6,7 @@ os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "1"
 
 import pygame
 import torch
+import torch.nn.functional as F
 
 SEED = 313131
 
@@ -28,16 +29,22 @@ screen = torch.zeros(
     dtype=torch.float32,
 )
 
-xs = 2.0 * us.float() / (WIDTH - 1) - 1.0
-ys = 0.5 - vs.float() / (HEIGHT - 1)
+# Centered coordinates
+xs = (2.0 * us.float() / (WIDTH - 1) - 1.0) * WIDTH / HEIGHT
+ys = 1.0 - 2.0 * vs.float() / (HEIGHT - 1)
 
-# No pixel may be exactly on x = 0, so we use a larger tolerance for x axis
-x_axis_mask = torch.isclose(xs, torch.zeros_like(xs), atol=2.0 / WIDTH)
-y_axis_mask = torch.isclose(ys, torch.zeros_like(ys), atol=1.0 / HEIGHT)
-screen[x_axis_mask | y_axis_mask] = torch.tensor([255, 255, 255], dtype=torch.float32)
+raydirs = torch.stack(
+    [xs, ys, torch.ones_like(xs)],
+    dim=-1,
+)
 
-function_mask = torch.isclose(xs.pow(3), ys, atol=1.0 / HEIGHT)
-screen[function_mask] = torch.tensor([255, 0, 0], dtype=torch.float32)
+raydirs = F.normalize(raydirs, dim=-1)
+
+# Ray directions render
+screen[..., 0] = raydirs[..., 0].abs()  # red: horizontal distance
+screen[..., 1] = raydirs[..., 1].abs()  # green: vertical distance
+screen[..., 2] = 0.0  # no blue
+screen = (screen * 255.0).clamp(0, 255).to(torch.uint8)
 
 
 def render():
@@ -48,7 +55,7 @@ def render():
 
 
 pygame.init()
-pygame.display.set_caption("Pytorch: Conway's game of life")
+pygame.display.set_caption("Ray Directions")
 window = pygame.display.set_mode(RESOLUTION)
 clock = pygame.time.Clock()
 
